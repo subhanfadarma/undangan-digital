@@ -1,7 +1,6 @@
 // ========== Musik Background ==========
 const musicBtn = document.getElementById("music-btn");
 const bgMusic = document.getElementById("bg-music");
-
 let isPlaying = false;
 
 musicBtn.addEventListener("click", () => {
@@ -16,14 +15,14 @@ musicBtn.addEventListener("click", () => {
 });
 
 // ========== Countdown ==========
-const targetDate = new Date("Nov 10, 2025 09:00:00").getTime();
+const targetDate = new Date("Nov 15, 2025 09:00:00").getTime();
 
 function updateCountdown() {
   const now = new Date().getTime();
   const distance = targetDate - now;
 
   if (distance < 0) {
-    document.getElementById("countdown-timer").innerHTML = "<p>Acara sudah dimulai 🎉</p>";
+    document.getElementById("countdown-timer").innerHTML = "<p>Acara sedang berlangsung 🎉</p>";
     return;
   }
 
@@ -39,14 +38,12 @@ function updateCountdown() {
 }
 
 setInterval(updateCountdown, 1000);
-updateCountdown(); // jalankan pertama kali
+updateCountdown();
 
 // ========== Animasi Scroll ==========
 const slideUpElements = document.querySelectorAll(".slide-up");
-
 function checkSlide() {
   const triggerBottom = window.innerHeight * 0.85;
-
   slideUpElements.forEach(el => {
     const rect = el.getBoundingClientRect();
     if (rect.top < triggerBottom) {
@@ -54,6 +51,49 @@ function checkSlide() {
     }
   });
 }
-
 window.addEventListener("scroll", checkSlide);
 window.addEventListener("load", checkSlide);
+
+// ========== Lightbox Gallery ==========
+const gallery = document.querySelectorAll('.gallery-item');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const closeBtn = document.getElementById('closeBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+let currentIndex = 0;
+
+function showLightbox(index) {
+  currentIndex = index;
+  lightbox.style.display = "flex";
+  lightboxImg.src = gallery[index].src;
+}
+
+function closeLightbox() {
+  lightbox.style.display = "none";
+}
+
+function showNext() {
+  currentIndex = (currentIndex + 1) % gallery.length;
+  lightboxImg.src = gallery[currentIndex].src;
+}
+
+function showPrev() {
+  currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+  lightboxImg.src = gallery[currentIndex].src;
+}
+
+gallery.forEach((img, index) => {
+  img.addEventListener("click", () => showLightbox(index));
+});
+
+closeBtn.addEventListener("click", closeLightbox);
+nextBtn.addEventListener("click", showNext);
+prevBtn.addEventListener("click", showPrev);
+
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) {
+    closeLightbox();
+  }
+});
