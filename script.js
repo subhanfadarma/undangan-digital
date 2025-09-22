@@ -1,95 +1,59 @@
-// ========== Background Music Control ==========
-const music = document.getElementById("background-music");
+// ========== Musik Background ==========
 const musicBtn = document.getElementById("music-btn");
+const bgMusic = document.getElementById("bg-music");
 
-if (music && musicBtn) {
-  musicBtn.addEventListener("click", () => {
-    if (music.paused) {
-      music.play();
-      musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      musicBtn.classList.add("is-playing");
-    } else {
-      music.pause();
-      musicBtn.innerHTML = '<i class="fas fa-music"></i>';
-      musicBtn.classList.remove("is-playing");
-    }
-  });
-}
+let isPlaying = false;
 
-// ========== Countdown Timer ==========
-function startCountdown() {
-  const countdownDate = new Date("2025-12-31T08:00:00").getTime(); // ganti tanggal sesuai acara
-  const daysEl = document.getElementById("days");
-  const hoursEl = document.getElementById("hours");
-  const minutesEl = document.getElementById("minutes");
-  const secondsEl = document.getElementById("seconds");
-
-  if (!daysEl) return;
-
-  setInterval(() => {
-    const now = new Date().getTime();
-    const distance = countdownDate - now;
-
-    if (distance < 0) {
-      daysEl.innerText = "0";
-      hoursEl.innerText = "0";
-      minutesEl.innerText = "0";
-      secondsEl.innerText = "0";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    daysEl.innerText = days;
-    hoursEl.innerText = hours;
-    minutesEl.innerText = minutes;
-    secondsEl.innerText = seconds;
-  }, 1000);
-}
-startCountdown();
-
-// ========== Scroll Animations ==========
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, { threshold: 0.2 });
-
-document.querySelectorAll(".slide-up").forEach(el => observer.observe(el));
-
-// ========== Gallery Lightbox ==========
-const galleryItems = document.querySelectorAll(".gallery-item");
-const lightbox = document.createElement("div");
-lightbox.className = "lightbox";
-document.body.appendChild(lightbox);
-
-const lightboxImg = document.createElement("img");
-lightboxImg.className = "lightbox-img";
-lightbox.appendChild(lightboxImg);
-
-const closeBtn = document.createElement("span");
-closeBtn.className = "close-btn";
-closeBtn.innerHTML = "&times;";
-lightbox.appendChild(closeBtn);
-
-galleryItems.forEach(item => {
-  item.addEventListener("click", () => {
-    lightbox.style.display = "flex";
-    lightboxImg.src = item.src;
-  });
-});
-
-closeBtn.addEventListener("click", () => {
-  lightbox.style.display = "none";
-});
-
-lightbox.addEventListener("click", e => {
-  if (e.target !== lightboxImg) {
-    lightbox.style.display = "none";
+musicBtn.addEventListener("click", () => {
+  if (isPlaying) {
+    bgMusic.pause();
+    musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+  } else {
+    bgMusic.play();
+    musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
   }
+  isPlaying = !isPlaying;
 });
+
+// ========== Countdown ==========
+const targetDate = new Date("Nov 10, 2025 09:00:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  if (distance < 0) {
+    document.getElementById("countdown-timer").innerHTML = "<p>Acara sudah dimulai 🎉</p>";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown(); // jalankan pertama kali
+
+// ========== Animasi Scroll ==========
+const slideUpElements = document.querySelectorAll(".slide-up");
+
+function checkSlide() {
+  const triggerBottom = window.innerHeight * 0.85;
+
+  slideUpElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < triggerBottom) {
+      el.classList.add("visible");
+    }
+  });
+}
+
+window.addEventListener("scroll", checkSlide);
+window.addEventListener("load", checkSlide);
