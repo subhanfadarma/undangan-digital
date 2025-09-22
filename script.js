@@ -1,99 +1,95 @@
-// ========== Musik Background ==========
+// ========== Background Music Control ==========
+const music = document.getElementById("background-music");
 const musicBtn = document.getElementById("music-btn");
-const bgMusic = document.getElementById("bg-music");
-let isPlaying = false;
 
-musicBtn.addEventListener("click", () => {
-  if (isPlaying) {
-    bgMusic.pause();
-    musicBtn.innerHTML = '<i class="fas fa-music"></i>';
-  } else {
-    bgMusic.play();
-    musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-  }
-  isPlaying = !isPlaying;
-});
-
-// ========== Countdown ==========
-const targetDate = new Date("Nov 15, 2025 09:00:00").getTime();
-
-function updateCountdown() {
-  const now = new Date().getTime();
-  const distance = targetDate - now;
-
-  if (distance < 0) {
-    document.getElementById("countdown-timer").innerHTML = "<p>Acara sedang berlangsung 🎉</p>";
-    return;
-  }
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("days").innerText = days;
-  document.getElementById("hours").innerText = hours;
-  document.getElementById("minutes").innerText = minutes;
-  document.getElementById("seconds").innerText = seconds;
-}
-
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// ========== Animasi Scroll ==========
-const slideUpElements = document.querySelectorAll(".slide-up");
-function checkSlide() {
-  const triggerBottom = window.innerHeight * 0.85;
-  slideUpElements.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < triggerBottom) {
-      el.classList.add("visible");
+if (music && musicBtn) {
+  musicBtn.addEventListener("click", () => {
+    if (music.paused) {
+      music.play();
+      musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      musicBtn.classList.add("is-playing");
+    } else {
+      music.pause();
+      musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+      musicBtn.classList.remove("is-playing");
     }
   });
 }
-window.addEventListener("scroll", checkSlide);
-window.addEventListener("load", checkSlide);
 
-// ========== Lightbox Gallery ==========
-const gallery = document.querySelectorAll('.gallery-item');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const closeBtn = document.getElementById('closeBtn');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+// ========== Countdown Timer ==========
+function startCountdown() {
+  const countdownDate = new Date("2025-12-31T08:00:00").getTime(); // ganti tanggal sesuai acara
+  const daysEl = document.getElementById("days");
+  const hoursEl = document.getElementById("hours");
+  const minutesEl = document.getElementById("minutes");
+  const secondsEl = document.getElementById("seconds");
 
-let currentIndex = 0;
+  if (!daysEl) return;
 
-function showLightbox(index) {
-  currentIndex = index;
-  lightbox.style.display = "flex";
-  lightboxImg.src = gallery[index].src;
+  setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+
+    if (distance < 0) {
+      daysEl.innerText = "0";
+      hoursEl.innerText = "0";
+      minutesEl.innerText = "0";
+      secondsEl.innerText = "0";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    daysEl.innerText = days;
+    hoursEl.innerText = hours;
+    minutesEl.innerText = minutes;
+    secondsEl.innerText = seconds;
+  }, 1000);
 }
+startCountdown();
 
-function closeLightbox() {
-  lightbox.style.display = "none";
-}
+// ========== Scroll Animations ==========
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.2 });
 
-function showNext() {
-  currentIndex = (currentIndex + 1) % gallery.length;
-  lightboxImg.src = gallery[currentIndex].src;
-}
+document.querySelectorAll(".slide-up").forEach(el => observer.observe(el));
 
-function showPrev() {
-  currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
-  lightboxImg.src = gallery[currentIndex].src;
-}
+// ========== Gallery Lightbox ==========
+const galleryItems = document.querySelectorAll(".gallery-item");
+const lightbox = document.createElement("div");
+lightbox.className = "lightbox";
+document.body.appendChild(lightbox);
 
-gallery.forEach((img, index) => {
-  img.addEventListener("click", () => showLightbox(index));
+const lightboxImg = document.createElement("img");
+lightboxImg.className = "lightbox-img";
+lightbox.appendChild(lightboxImg);
+
+const closeBtn = document.createElement("span");
+closeBtn.className = "close-btn";
+closeBtn.innerHTML = "&times;";
+lightbox.appendChild(closeBtn);
+
+galleryItems.forEach(item => {
+  item.addEventListener("click", () => {
+    lightbox.style.display = "flex";
+    lightboxImg.src = item.src;
+  });
 });
 
-closeBtn.addEventListener("click", closeLightbox);
-nextBtn.addEventListener("click", showNext);
-prevBtn.addEventListener("click", showPrev);
+closeBtn.addEventListener("click", () => {
+  lightbox.style.display = "none";
+});
 
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) {
-    closeLightbox();
+lightbox.addEventListener("click", e => {
+  if (e.target !== lightboxImg) {
+    lightbox.style.display = "none";
   }
 });
