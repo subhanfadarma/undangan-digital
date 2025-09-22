@@ -3,124 +3,126 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Pernikahan Aisyah & Fikri</title>
+  <title>Undangan Pernikahan</title>
 
-  <!-- SEO & Social Share -->
-  <meta name="description" content="Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan kami.">
-  <meta name="keywords" content="undangan pernikahan digital, wedding invitation, undangan online">
-  <meta name="author" content="Undangan Digital">
-
+  <!-- SEO & Share -->
+  <meta name="description" content="Undangan Pernikahan Digital. Hadir dan berikan doa restu untuk pernikahan kami.">
   <meta property="og:title" content="Undangan Pernikahan Aisyah & Fikri">
   <meta property="og:description" content="Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan kami.">
-  <meta property="og:image" content="cover.jpg">
-  <meta property="og:url" content="https://contoh-undangan.com">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
   <meta property="og:type" content="website">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Undangan Pernikahan Aisyah & Fikri">
-  <meta name="twitter:description" content="Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan kami.">
-  <meta name="twitter:image" content="cover.jpg">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-  <!-- Icon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://kit.fontawesome.com/4d8e9c4d3c.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-  <!-- Tombol Musik -->
-  <button class="music-toggle-btn" id="music-btn"><i class="fas fa-music"></i></button>
-  <audio id="bg-music" loop>
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section class="hero">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="opening-title">Undangan Pernikahan</p>
+      <p class="opening-title">The Wedding of</p>
       <h1 class="couple-names">Aisyah & Fikri</h1>
-      <p class="date">Minggu, 10 November 2025</p>
-      <a href="#profile" class="button">Lihat Undangan</a>
+      <p class="date">Sabtu, 15 November 2025</p>
+      <button id="open-btn" class="button">Buka Undangan</button>
     </div>
   </section>
 
-  <!-- Profil Mempelai -->
-  <section id="profile" class="section slide-up">
-    <h2>Pasangan Mempelai</h2>
+  <!-- Musik Button -->
+  <button id="music-btn" class="music-toggle-btn"><i class="fas fa-music"></i></button>
+  <audio id="bg-music" loop>
+    <source src="musik.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Doa -->
+  <section id="doa" class="section slide-up">
+    <h2 class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h2>
+    <p>Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah, perkenankanlah kami merangkai cinta suci-Mu dalam ikatan pernikahan.</p>
+  </section>
+
+  <!-- Profil Pasangan -->
+  <section id="profil" class="section slide-up">
+    <h2>Mempelai</h2>
     <div class="profile-container">
       <div class="profile-card">
-        <img src="https://picsum.photos/300/300?random=1" alt="Mempelai Wanita" class="profile-img">
-        <h3>Aisyah Putri</h3>
-        <p class="parent-info">Putri dari Bapak Ahmad & Ibu Siti</p>
+        <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?crop=faces&fit=crop&w=400&h=400" alt="Mempelai Pria" class="profile-img">
+        <h3>Fikri</h3>
+        <p>Putra dari Bapak Ahmad & Ibu Siti</p>
       </div>
       <div class="separator-icon"><i class="fas fa-heart"></i></div>
       <div class="profile-card">
-        <img src="https://picsum.photos/300/300?random=2" alt="Mempelai Pria" class="profile-img">
-        <h3>Muhammad Fikri</h3>
-        <p class="parent-info">Putra dari Bapak Budi & Ibu Nur</p>
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=faces&fit=crop&w=400&h=400" alt="Mempelai Wanita" class="profile-img">
+        <h3>Aisyah</h3>
+        <p>Putri dari Bapak Budi & Ibu Aminah</p>
       </div>
     </div>
   </section>
 
-  <!-- Countdown -->
-  <section id="countdown" class="section slide-up">
-    <h2>Menuju Hari Bahagia</h2>
-    <div class="countdown-container" id="countdown-timer">
-      <div class="countdown-item"><span id="days">0</span><p>Hari</p></div>
-      <div class="countdown-item"><span id="hours">0</span><p>Jam</p></div>
-      <div class="countdown-item"><span id="minutes">0</span><p>Menit</p></div>
-      <div class="countdown-item"><span id="seconds">0</span><p>Detik</p></div>
-    </div>
-  </section>
-
-  <!-- Acara -->
-  <section id="event" class="section slide-up">
+  <!-- Detail Acara -->
+  <section id="acara" class="section slide-up">
     <h2>Detail Acara</h2>
+
+    <div class="countdown-container" id="countdown-timer">
+      <div class="countdown-item"><span id="days">00</span><p>Hari</p></div>
+      <div class="countdown-item"><span id="hours">00</span><p>Jam</p></div>
+      <div class="countdown-item"><span id="minutes">00</span><p>Menit</p></div>
+      <div class="countdown-item"><span id="seconds">00</span><p>Detik</p></div>
+    </div>
+
     <div class="event-details">
       <div class="event-card">
         <h3>Akad Nikah</h3>
-        <p><i class="fas fa-calendar"></i> Minggu, 10 November 2025</p>
-        <p><i class="fas fa-clock"></i> 09.00 WIB</p>
-        <p><i class="fas fa-map-marker-alt"></i> Masjid Al-Hikmah, Jakarta</p>
+        <p><i class="fas fa-calendar"></i> Sabtu, 15 Nov 2025</p>
+        <p><i class="fas fa-clock"></i> 09:00 WIB</p>
+        <p><i class="fas fa-map-marker-alt"></i> Masjid Agung Al-Falah</p>
       </div>
       <div class="event-card">
         <h3>Resepsi</h3>
-        <p><i class="fas fa-calendar"></i> Minggu, 10 November 2025</p>
-        <p><i class="fas fa-clock"></i> 11.00 WIB - selesai</p>
-        <p><i class="fas fa-map-marker-alt"></i> Gedung Serbaguna, Jakarta</p>
+        <p><i class="fas fa-calendar"></i> Sabtu, 15 Nov 2025</p>
+        <p><i class="fas fa-clock"></i> 11:00 - 15:00 WIB</p>
+        <p><i class="fas fa-map-marker-alt"></i> Gedung Serbaguna Kota</p>
       </div>
     </div>
   </section>
 
+  <!-- Maps -->
+  <section id="lokasi" class="section slide-up">
+    <h2>Lokasi Acara</h2>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.2766601449836!2d107.57529271477312!3d-6.974051094966904" allowfullscreen></iframe>
+    </div>
+    <a href="https://maps.app.goo.gl/abcdefg12345" target="_blank" class="button">Buka di Google Maps</a>
+  </section>
+
   <!-- Galeri -->
-  <section id="gallery" class="section slide-up">
+  <section id="galeri" class="section slide-up">
     <h2>Galeri Foto</h2>
     <div class="photo-grid">
-      <img src="https://picsum.photos/400/400?random=11" class="gallery-item" alt="Foto 1">
-      <img src="https://picsum.photos/400/400?random=12" class="gallery-item" alt="Foto 2">
-      <img src="https://picsum.photos/400/400?random=13" class="gallery-item" alt="Foto 3">
-      <img src="https://picsum.photos/400/400?random=14" class="gallery-item" alt="Foto 4">
-      <img src="https://picsum.photos/400/400?random=15" class="gallery-item" alt="Foto 5">
-      <img src="https://picsum.photos/400/400?random=16" class="gallery-item" alt="Foto 6">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" class="gallery-item" alt="Foto 1">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1" class="gallery-item" alt="Foto 2">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" class="gallery-item" alt="Foto 3">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" class="gallery-item" alt="Foto 4">
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9" class="gallery-item" alt="Foto 5">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" class="gallery-item" alt="Foto 6">
     </div>
   </section>
 
-  <!-- Peta -->
-  <section id="map" class="section slide-up">
-    <h2>Lokasi Acara</h2>
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.492687033482!2d106.8269309!3d-6.2000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e4c0f63ad%3A0x1234567890abcdef!2sJakarta!5e0!3m2!1sid!2sid!4v1695222222222" allowfullscreen="" loading="lazy"></iframe>
+  <!-- RSVP -->
+  <section id="rsvp" class="section slide-up">
+    <h2>Konfirmasi Kehadiran</h2>
+    <p>Mohon konfirmasi kehadiran Anda melalui tombol di bawah ini.</p>
+    <div class="rsvp-buttons">
+      <a href="https://forms.gle/abcdefg12345" target="_blank" class="button">Konfirmasi via Form</a>
+      <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20akan%20hadir%20di%20acara%20pernikahan." target="_blank" class="button">Konfirmasi via WhatsApp</a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>Terima kasih atas doa & restu Anda</p>
-    <p>Aisyah & Fikri</p>
+    <p>"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri, supaya kamu merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang." (Q.S. Ar-Rum: 21)</p>
+    <p>&copy; 2025 Aisyah & Fikri</p>
   </footer>
 
-  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
