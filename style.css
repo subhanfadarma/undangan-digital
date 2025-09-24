@@ -20,10 +20,37 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--white-gading);
   color: var(--black);
   line-height: 1.6;
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #fdfcfb, #f8efe6); /* gradient */
 }
+
+/* Ornamen kiri atas */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 220px; height: 220px;
+  background: url("photos/floral-left.png") no-repeat center/contain;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ornamen kanan bawah */
+body::after {
+  content: "";
+  position: fixed;
+  bottom: 0; right: 0;
+  width: 220px; height: 220px;
+  background: url("photos/floral-right.png") no-repeat center/contain;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 0;
+}
+
 
 h1, h2, h3 {
   font-family: 'Playfair Display', serif;
@@ -48,45 +75,27 @@ p {
   text-align: center;
   position: relative;
 
-  /* fallback warna gradasi */
-  background: linear-gradient(120deg, #bfa14a, #8c6b4a);
-
-  /* background gambar */
-  background-image: url('https://picsum.photos/1600/900?blur');
+  /* background foto sendiri */
+  background-image: url('photos/hero-bg.jpg');
   background-size: cover;
   background-position: center;
 }
 
-.hero-overlay {
+
+.hero::after {
+  content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.4);
+  bottom: 0; left: 0;
+  width: 100%; height: 150px;
+  background: linear-gradient(to bottom, transparent, var(--white-gading));
+  z-index: 2;
 }
 
+
+/*Jarak z overlay hero content*/
 .hero-content {
   position: relative;
-  z-index: 2;
-  color: white;
-  animation: fadeInUp 2s ease;
-}
-
-.opening-title {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  color: var(--white-gading);
-}
-
-.couple-names {
-  font-size: 3em;
-  color: var(--gold);
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-}
-
-.date {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  font-style: italic;
+  z-index: 3; /* lebih tinggi dari overlay */
 }
 
 /* ========== Section Umum ========== */
@@ -291,4 +300,26 @@ footer {
 @media (max-width: 480px) {
   .photo-grid { grid-template-columns: 1fr; }
   .couple-names { font-size: 2em; }
+}
+
+.floating-items {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.leaf {
+  position: absolute;
+  bottom: -50px;
+  width: 40px;
+  opacity: 0;
+  animation: floatUp 12s linear infinite;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
 }
