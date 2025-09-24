@@ -93,3 +93,13 @@ lightbox.addEventListener("click", e => {
     lightbox.style.display = "none";
   }
 });
+
+const container = document.querySelector('.floating-items');
+for (let i = 0; i < 8; i++) {
+  const leaf = document.createElement('img');
+  leaf.src = 'photos/leaf1.png'; // bisa variasi leaf1/2/3
+  leaf.classList.add('leaf');
+  leaf.style.left = Math.random() * 90 + '%';
+  leaf.style.animationDelay = (Math.random() * 10) + 's';
+  container.appendChild(leaf);
+}
