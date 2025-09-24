@@ -28,6 +28,12 @@ body {
   /* Background foto */
   background: url("photos/hero-bg.jpg") center center / cover no-repeat fixed;
 
+  /* Opsional: untuk desktop tetap fixed */
+  @media (min-width: 769px) {
+  body {
+    background-attachment: fixed;
+  }
+
   /* Kalau mau ada gradient overlay lembut di atas foto */
   position: relative;
 }
@@ -310,3 +316,4 @@ footer {
   .photo-grid { grid-template-columns: 1fr; }
   .couple-names { font-size: 2em; }
 }
+
